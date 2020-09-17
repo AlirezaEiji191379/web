@@ -17,6 +17,7 @@ if(checkNotEmptyForm($_POST)){
                                 $_SESSION["uploadTime"]=time();
                                 $_SESSION["qFile"]=$_FILES["myFile"]["name"];
                                 $_SESSION["aFile"]=$_FILES["myFile2"]["name"];
+                                addExamToDb();
                                 header("location: ../../Pages/adminPanel/inputForm.php");
                             }else{
                                 header("location: ../../Pages/adminPanel/createExam.php?error=duration");
@@ -43,11 +44,3 @@ if(checkNotEmptyForm($_POST)){
 }else{
     header("location: ../../Pages/adminPanel/createExam.php?error=empty");
 }
-
-
-
-
-
-
-
-

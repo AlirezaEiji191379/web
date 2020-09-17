@@ -1,0 +1,1 @@
+"G:\xampp\php\php.exe" -f "G:\xampp\htdocs\web\cronJob\updateExam\updateExam.php"
