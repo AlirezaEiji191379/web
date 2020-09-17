@@ -64,6 +64,19 @@ function uploadExamFile(){
     if(move_uploaded_file($_FILES["myFile"]["tmp_name"],$target_File)==false){
         header("location: ../../Pages/adminPanel/createExam.php?error=fileCancel");
         die();
+    }else{
+        $id=-1;
+        $mysql=new mysqli(host,username,password,dbname);
+        $result=$mysql->query("SELECT `examId` FROM `exam` ORDER BY DESC LIMIT 1");
+        if($result==false) $id=1;
+        else {
+            while($rows=$result->fetch_assoc()){
+                $id=$rows["examId"]+1;
+            }
+        }
+        $newDir=$targetDir."/upload/"."Q"."$id".".pdf";
+        rename($target_File,$newDir);
+        $_FILES["myFile"]["name"]="Q"."$id".".pdf";
     }
 }
 
@@ -82,6 +95,19 @@ function uploadKeyFile(){
     if(move_uploaded_file($_FILES["myFile2"]["tmp_name"],$target_File)==false){
         header("location: ../../Pages/adminPanel/createExam.php?error=fileCancel");
         die();
+    }else{
+        $id=-1;
+        $mysql=new mysqli(host,username,password,dbname);
+        $result=$mysql->query("SELECT `examId` FROM `exam` ORDER BY DESC LIMIT 1");
+        if($result==false) $id=1;
+        else {
+            while($rows=$result->fetch_assoc()){
+                $id=$rows["examId"]+1;
+            }
+        }
+        $newDir=$targetDir."/upload/"."A"."$id".".pdf";
+        rename($target_File,$newDir);
+        $_FILES["myFile2"]["name"]="A"."$id".".pdf";
     }
 }
 

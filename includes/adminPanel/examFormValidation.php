@@ -13,7 +13,7 @@ if(checkNotEmptyForm($_POST)){
                             uploadExamFile();
                             uploadKeyFile();
                             saveToSession($startTime, $endTime);
-                            header("location: ../../Pages/adminPanel/inputForm.php");
+                           // header("location: ../../Pages/adminPanel/inputForm.php");
                         } else {
                             header("location: ../../Pages/adminPanel/createExam.php?error=date");
                         }
