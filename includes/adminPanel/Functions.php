@@ -45,13 +45,11 @@ function saveToSession($start,$end){
     $_SESSION["time"]=$_POST["time"];
     $_SESSION["startTime"]=$start;
     $_SESSION["endTime"]=$end;
-    $_SESSION["qDir"]= ini_get("upload_tmp_dir")."/upload/".$_FILES["myFile"]["name"];
-    $_SESSION["aDir"]=ini_get("upload_tmp_dir")."/upload/".$_FILES["myFile2"]["name"];
 }
 
 function uploadExamFile(){
     $targetDir=ini_get("upload_tmp_dir");
-    $target_File=$targetDir."/upload/".$_FILES["myFile"]["name"];
+    $target_File=$_FILES["myFile"]["name"];
     $pdfFileType = strtolower(pathinfo($target_File,PATHINFO_EXTENSION));
     if($_FILES["myFile"]["size"]>40000000){
         header("location: ../../Pages/adminPanel/createExam.php?error=fileSize");
@@ -82,7 +80,7 @@ function uploadExamFile(){
 
 function uploadKeyFile(){
     $targetDir=ini_get("upload_tmp_dir");
-    $target_File=$targetDir."/upload/".$_FILES["myFile2"]["name"];
+    $target_File=$_FILES["myFile2"]["name"];
     $pdfFileType = strtolower(pathinfo($target_File,PATHINFO_EXTENSION));
     if($_FILES["myFile2"]["size"]>40000000){
         header("location: ../../Pages/adminPanel/createExam.php?error=fileSize");
@@ -135,13 +133,25 @@ function addAllToDb()
     $points=makeSafe($_SESSION["points"]);
     $startTime=makeSafe($_SESSION["startTime"]);
     $endTime=makeSafe($_SESSION["endTime"]);
+    $qDir=ini_get("upload_tmp_dir")."/upload/".$_FILES["myFile"]["name"];
+    $aDir=ini_get("upload_tmp_dir")."/upload/".$_FILES["myFile2"]["name"];
     $mysql=new mysqli(host,username,password,dbname);
-    $statement=$mysql->prepare("INSERT INTO `exam` (`fname`,`points`,`duration`,`startTime`,`endTime`) VALUES (?,?,?,?,?)");
-    $statement->bind_param("siiii",$fname,$duration,$points,$startTime,$endTime);
+    $statement=$mysql->prepare("INSERT INTO `exam` (`fname`,`points`,`duration`,`startTime`,`endTime`,`qDir`,`aDir`) VALUES (?,?,?,?,?,?,?)");
+    $statement->bind_param("siiiiss",$fname,$points,$duration,$startTime,$endTime,$qDir,$aDir);
     $statement->execute();
-    $str="Question:";
     $id=$statement->insert_id;
-    echo $id;
+    $str="Question:";
+    for($i=1 ; $i<$points+1;$i++){
+        $answer=$_POST[$str.$i];
+        $mysql->query("INSERT INTO `answerkey` (`examId`,`question`,`answer`) VALUES ($id,$i,$answer)");
+    }
+    $mysql->close();
+    foreach($_SESSION as $key => $value){
+        if($key=="username" || $key=="type" || $key=="logged_in") continue;
+        else{
+            unset($_SESSION[$key]);
+        }
+    }
 }
 
 function makeSafe($input){

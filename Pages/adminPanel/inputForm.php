@@ -1,4 +1,14 @@
-<?php include_once("../../includes/checkValidation/adminValidation.php"); ?>
+<?php include_once("../../includes/checkValidation/adminValidation.php");
+
+if(session_status()==PHP_SESSION_NONE){
+    session_start();
+}
+if(isset($_SESSION["fileUpload"])==false){
+    header("location: ../../Pages/adminPanel/createExam.php");
+}
+
+
+?>
     <!DOCTYPE html>
     <html>
         <header>
@@ -7,10 +17,6 @@
              </header>
 
         <body>
-  
-
-
-
 <div class="topNav">
 <h1 style="color: #000000;">Raman Exams</h1>
 <div class="timerContainer">

@@ -23,6 +23,10 @@ if(isset($_GET["error"])){
         echo "لطفا به تعداد سوالات کلید پر کنید!";
     }elseif($_GET["error"]=="emptyAFile"){
         echo "لطفا فایل پاسخنامه را آپلود کنید!";
+    }elseif($_GET["error"]=="duration"){
+        echo "زمان آزمون نامناسب است!";
+    }elseif($_GET["error"]=="timeUp"){
+        echo "لطفا مجددا اقدام به ثبت آزمون نمایید!";
     }
 
 }

@@ -1,6 +1,5 @@
 <?php
 include_once ("Functions.php");
-
 if(checkNotEmptyForm($_POST)){
     if(checkNotEmptyFile("myFile")){
         if(checkNotEmptyFile("myFile2")) {
@@ -10,11 +9,20 @@ if(checkNotEmptyForm($_POST)){
                         if (compareDates($_POST["birthday"], $_POST["appt"], null, true)) {
                             $startTime = returnFormattedDate($_POST["birthday"], $_POST["appt"]);
                             $endTime = returnFormattedDate($_POST["birthday"], $_POST["appt2"]);;
-                            uploadExamFile();
-                            uploadKeyFile();
-                            saveToSession($startTime, $endTime);
-                           // header("location: ../../Pages/adminPanel/inputForm.php");
-                        } else {
+                            if($_POST["time"]*60 < $endTime-$startTime) {
+                                saveToSession($startTime, $endTime);
+                                uploadExamFile();
+                                uploadKeyFile();
+                                $_SESSION["fileUpload"]=1;
+                                $_SESSION["uploadTime"]=time();
+                                $_SESSION["qFile"]=$_FILES["myFile"]["name"];
+                                $_SESSION["aFile"]=$_FILES["myFile2"]["name"];
+                                header("location: ../../Pages/adminPanel/inputForm.php");
+                            }else{
+                                header("location: ../../Pages/adminPanel/createExam.php?error=duration");
+                            }
+                        }
+                        else {
                             header("location: ../../Pages/adminPanel/createExam.php?error=date");
                         }
                     } else {
