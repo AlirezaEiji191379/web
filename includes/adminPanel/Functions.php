@@ -90,7 +90,7 @@ function uploadKeyFile(){
         header("location: ../../Pages/adminPanel/createExam.php?error=fileExt");
         die();
     }
-    if(move_uploaded_file($_FILES["myFile2"]["tmp_name"],$target_File)==false){
+    if(move_uploaded_file($_FILES["myFile2"]["tmp_name"],$target_File)==false) {
         header("location: ../../Pages/adminPanel/createExam.php?error=fileCancel");
         die();
     }else{

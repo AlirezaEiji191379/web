@@ -27,7 +27,7 @@ if(isset($_SESSION["fileUpload"])==false){
 
 <!-- -->
 
-<form action="../../includes/adminPanel/inputFormValidation.php" method="post" class="form-horizontal">
+<form action="../../includes/adminPanel/inputFormValidation.php" method="post" class="form-horizontal" enctype="multipart/form-data">
     <p style="color: red"><?php include_once ("../../includes/adminPanel/checkErrors.php");?></p>
     <div class="userpassContainer">
      <!-- <input type="text" name="username" placeholder="Username">
@@ -84,7 +84,7 @@ if(isset($_SESSION["fileUpload"])==false){
           </div>
           
             </div>
-             <input type="submit" class="btn btn-default getStartedButton"></input>
+             <input type="submit" class="btn btn-default getStartedButton">
             </form>
            
            

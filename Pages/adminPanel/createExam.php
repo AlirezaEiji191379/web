@@ -3,16 +3,15 @@
 <html>
     <header>
          <link rel="stylesheet" type="text/css" href="style.css"/>
-         
+
     </header>
     
     <body>
         <div class="topNav">
             <h1 style="color: #000000;">Raman Exams</h1>
         </div> 
-        
-       <form  method="post"  enctype="multipart/form-data" action="../../includes/adminPanel/examFormValidation.php">
-           <p style="color:red;"><?php include_once ("../../includes/adminPanel/checkErrors.php");?></p>
+   <form  method="post"  enctype="multipart/form-data" action="../../includes/adminPanel/examFormValidation.php">
+   <p style="color:red;"><?php include_once ("../../includes/adminPanel/checkErrors.php");?></p>
   <label for="fname" class="formLabel">تیتر آزمون</label><br>
   <input type="text" id="fname" name="fname" class="formInput"><br>
   
@@ -36,7 +35,6 @@
 
    <label for="appt" class="formLabel">آپلود پاسخ آزمون</label><br>
     <input type="file" id="myFile2" name="myFile2" class="formInput"><br>
-
    <input type="submit" class="getStartedButton" value="ارسال">تایید</input>
 </form>
     </body>

@@ -18,7 +18,6 @@ if($difference>1800){
     header("location: ../../Pages/adminPanel/createExam.php?error=timeUp");
     die();
 }
-
 checkSelectedOptions();
 addAllToDb();
 header("location: ../../Pages/adminPanel/adminPanel.php");
