@@ -17,6 +17,8 @@ if(isset($_COOKIE[session_name()]) && isset($_SESSION["time"]) && isset($_SESSIO
             $_SESSION["time"] = time();
         }
     }
+}else{
+    session_destroy();
 }
 
 

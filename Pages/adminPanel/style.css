@@ -33,7 +33,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #222;
+    /*background-color: #222;*/
 }
 
 .custom-radios div {

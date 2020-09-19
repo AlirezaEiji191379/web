@@ -19,5 +19,6 @@ if(isset($_COOKIE[session_name()]) && isset($_SESSION["time"]) && isset($_SESSIO
         }
     }
 }else{
+    session_destroy();
     header("location: ../../Pages/emailConfirm/emailConfirmation.php?error=6");
 }
