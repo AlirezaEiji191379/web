@@ -9,10 +9,10 @@ if(isset($_GET["examId"])){
         session_start();
     }
     $username=$_SESSION["username"];
-    $select=$mysql->query("SELECT `examId`,`accept` FROM `examrequest` WHERE `username`='$username'");
+    $select=$mysql->query("SELECT `examId`,`accept` FROM `examrequest` WHERE `username`='$username' AND `examId`='$examId'");
+
     if($select->num_rows==0){
         $result=$mysql->query("INSERT INTO `examrequest` (`examId`,`username`) VALUES ('$examId','$username')");
-        echo $mysql->error;
     }else{
 
 
@@ -20,6 +20,7 @@ if(isset($_GET["examId"])){
     }
 
 }
+
 
 $mysql->close();
 
