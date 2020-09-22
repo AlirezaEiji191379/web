@@ -111,6 +111,17 @@ for (var i = 1; i <= 500; i++) {
     //     document.getElementsByClassName("radioLabels")[i*3].setAttribute('for', ("id" + (i*3)))
 
 }
+function getExamFromDataBase() {
+    let xmlHttpRequest=new XMLHttpRequest();
+    xmlHttpRequest.onreadystatechange=function () {
+
+    };
+
+
+}
+
+
+
 
 
 
@@ -255,11 +266,11 @@ function postNote() {
 
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
-var totalSeconds = 0;
+var totalSeconds = 300;
 setInterval(setTime, 1000);
 
 function setTime() {
-    ++totalSeconds;
+    totalSeconds--;
     secondsLabel.innerHTML = pad(totalSeconds % 60);
     minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
 }

@@ -18,19 +18,20 @@ $username=$_SESSION["username"];
 $selectRequest=new mysqli(host,username,password,dbname);
 $selectExam=new mysqli(host,username,password,dbname);
 
-$requestResult=$selectRequest->query("SELECT `examId`,`accept` FROM `examrequest` WHERE `username`='$username'");
+$requestResult=$selectRequest->query("SELECT `examId`,`accept`,`attendance` FROM `examrequest` WHERE `username`='$username'");
 $examResult=$selectExam->query("SELECT * FROM `exam`");
 $addedExams=null;
-
+$examAttendance=null;
 if($requestResult->num_rows==0){
 $zero=0;
 }else{
     $zero=1;
     while ($request=$requestResult->fetch_assoc()){
         $addedExams[$request["examId"]]=$request["accept"];
+        $examAttendance[$request["examId"]]=$request["attendance"];
     }
 }
-$selectRequest->close();
+
 if($examResult->num_rows==0){}
 else{
     while ($rows=$examResult->fetch_assoc()){
@@ -41,7 +42,10 @@ else{
             foreach ($addedExams as $key => $value) {
                 if ($id == $key) {
                     if ($value == 0) {$btnMessage = "در حال تایید"; $color="gray";}
-                    else if ($value == 1) {$btnMessage = "شرکت در آزمون"; $color="green";}
+                    else if ($value == 1) {
+                        if($examAttendance[$key]==0){$btnMessage = "شرکت در آزمون"; $color="green";}
+                        elseif($examAttendance[$key]==1){$btnMessage = "ادامه آزمون"; $color="purple";}
+                    }
                 }
             }
         }
@@ -69,6 +73,7 @@ $endTime
 }
 
 $selectExam->close();
+$selectRequest->close();
 ?>
 </body>
 </html>

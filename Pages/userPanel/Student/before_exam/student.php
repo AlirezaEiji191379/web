@@ -24,7 +24,10 @@
                     let reqXhttp=new XMLHttpRequest();
                     reqXhttp.onreadystatechange=function () {
                         if(this.status==200 && this.readyState==4){
-                            updateExam();
+                            if(this.responseText=="update") updateExam();
+                            else if(this.responseText=="redirect"){
+                                location.href="../exam_time/exam.php";
+                            }
                         }
                     };
                     reqXhttp.open("GET","../../../../includes/userPanel/examRequest.php?examId="+id,true);
