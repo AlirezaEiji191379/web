@@ -5,7 +5,7 @@ if(session_status()==PHP_SESSION_NONE) {
 }
     if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"]==1 && isset($_COOKIE[session_name()])){
         if(isset($_SESSION["type"])===true && $_SESSION["type"]=="User"){
-            header("location: ../../Pages/userPanel/userPanel.php");
+            header("location: ../../Pages/userPanel/Student/before_exam/student.php");
         }
 
     }

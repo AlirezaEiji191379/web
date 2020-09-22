@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(253, 253, 253);
+}
+
+.topNav {
+    position: fixed;
+    color: white;
+    height: 80px;
+    width: 100%;
+    background-color: rgb(100, 188, 255);
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 80px 0 60px;
+}
+
+.topTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logoImage {
+    width: 55px;
+    height: 55px;
+    margin-right: 20px;
+}
+
+.examsContainer {
+    top: 250px;
+    position: relative;
+}

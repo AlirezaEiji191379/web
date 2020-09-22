@@ -25,7 +25,7 @@ if($result->num_rows==1){
             header("location: ../../Pages/adminPanel/adminPanel.php");
         } elseif ($row["type"] === "User") {
             $_SESSION["type"] = "User";
-            header("location: ../../Pages/userPanel/userPanel.php");
+            header("location: ../../Pages/userPanel/Student/before_exam/student.php");
         }
 }else{
     header("location: ../../Pages/loginPanel/login.php?error=1");

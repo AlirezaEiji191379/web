@@ -10,5 +10,5 @@ if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"]==1 && isset($_COOKIE[
 }
 else{
     session_destroy();
-    header("location: ../../Pages/loginPanel/login.php");
+    header("location: ../../../loginPanel/login.php");
 }
