@@ -112,13 +112,18 @@ for (var i = 1; i <= 500; i++) {
 
 }
 function getExamFromDataBase() {
+
     let xmlHttpRequest=new XMLHttpRequest();
     xmlHttpRequest.onreadystatechange=function () {
-
+        if(this.readyState==4 && this.status==200){
+            let examData=JSON.parse(this.responseText);
+        }
     };
-
-
+    xmlHttpRequest.open("GET","../../../../includes/userPanel/getExamData.php",false);
+    xmlHttpRequest.send();
+    alert(xmlHttpRequest.status)
 }
+getExamFromDataBase();
 
 
 
