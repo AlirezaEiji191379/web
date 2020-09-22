@@ -5,10 +5,12 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            color:white;
+
         }
 
         table, td, th {
-            border: 1px solid black;
+            border: 1px solid white;
             padding: 5px;
         }
 
