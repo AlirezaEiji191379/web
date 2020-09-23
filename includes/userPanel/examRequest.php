@@ -8,7 +8,7 @@ if(isset($_GET["examId"])){
         session_start();
     }
     $username=$_SESSION["username"];
-    $select=$mysql->query("SELECT `examId`,`accept` FROM `examrequest` WHERE `username`='$username' AND `examId`='$examId'");
+    $select=$mysql->query("SELECT `examId`,`accept`,`finished` FROM `examrequest` WHERE `username`='$username' AND `examId`='$examId'");
 
     if($select->num_rows==0){
         $result=$mysql->query("SELECT `duration` FROM `exam` WHERE `examId`=$examId");
@@ -20,9 +20,13 @@ if(isset($_GET["examId"])){
         $row=$select->fetch_assoc();
         if($row["accept"]==0){}
         elseif($row["accept"]==1){
-                $_SESSION["examId"]=$examId;
-                $mysql->query("UPDATE `examrequest` SET `attendance`=1 WHERE `username`='$username' AND `examId`='$examId'");
-                echo "redirect";
+                if($row["finished"]==0) {
+                    $_SESSION["examId"] = $examId;
+                    $mysql->query("UPDATE `examrequest` SET `attendance`=1 WHERE `username`='$username' AND `examId`='$examId'");
+                    echo "exam";
+                }else{
+                    echo "result";
+                }
         }
     }
 }

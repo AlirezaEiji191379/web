@@ -27,8 +27,10 @@
                     reqXhttp.onreadystatechange=function () {
                         if(this.status==200 && this.readyState==4){
                             if(this.responseText=="update") updateExam();
-                            else if(this.responseText=="redirect"){
+                            else if(this.responseText=="exam"){
                                 location.href="../exam_time/exam.php";
+                            }else if(this.responseText=="result"){
+                                location.href="../after_exam/afterExam.php";
                             }
                         }
                     };

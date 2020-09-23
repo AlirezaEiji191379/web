@@ -25,7 +25,8 @@ for($i=1;$i<$points+1;$i++){
     }
 }
 $mysql->close();
-
+header("location: ../../Pages/userPanel/Student/before_exam/student.php");
+unset($_SESSION["examId"]);
 
 
 
