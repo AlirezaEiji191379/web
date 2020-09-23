@@ -111,19 +111,33 @@ for (var i = 1; i <= 500; i++) {
     //     document.getElementsByClassName("radioLabels")[i*3].setAttribute('for', ("id" + (i*3)))
 
 }
-function getExamFromDataBase() {
-
+function getAnsFromDataBase() {
     let xmlHttpRequest=new XMLHttpRequest();
     xmlHttpRequest.onreadystatechange=function () {
         if(this.readyState==4 && this.status==200){
-            let examData=JSON.parse(this.responseText);
+             var examData=JSON.parse(this.responseText);
+             let array=[];
+             for(key in examData){
+                 if(key=="time"){
+                    totalSeconds=examData[key];
+                 }else if(key=="points"){
+                    points=examData[key];
+                 }
+                 else {
+                     array[parseInt(key)] = examData[key];
+                 }
+             }
+             for(i=1;i<array.length;i++){
+                 var a = document.getElementsByClassName("radioId")
+                 var b = a[i].getElementsByClassName("radioInputs")
+                 b[array[i]-1].checked=true;
+             }
         }
     };
     xmlHttpRequest.open("GET","../../../../includes/userPanel/getExamData.php",false);
     xmlHttpRequest.send();
-    alert(xmlHttpRequest.status)
 }
-getExamFromDataBase();
+
 
 
 
@@ -271,9 +285,10 @@ function postNote() {
 
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
-var totalSeconds = 300;
+var totalSeconds =0;
+var points=0;
 setInterval(setTime, 1000);
-
+getAnsFromDataBase()
 function setTime() {
     totalSeconds--;
     secondsLabel.innerHTML = pad(totalSeconds % 60);
@@ -288,3 +303,29 @@ function pad(val) {
         return valString;
     }
 }
+ window.addEventListener('beforeunload',function (event) {
+    event.returnValue='';
+    var a = document.getElementsByClassName("radioId");
+    let arr=[];
+    for(let i=1;i<points+1;i++){
+       var b=a[i].getElementsByClassName("radioInputs")
+       for(let j=0;j<4;j++){
+           if(i>points) continue;
+            if(b[j].checked==true){
+                arr[i]=j+1;
+                break;
+            }
+       }
+    }
+    let xml=new XMLHttpRequest();
+    xml.onreadystatechange=function () {
+        if(this.status==200&& this.readyState==4){
+            console.log(this.responseText);
+        }
+    };
+    xml.open("POST","../../../../includes/userPanel/saveDataInDatabase.php");
+    xml.setRequestHeader("Content-Type", "application/json");
+    let obj={time:totalSeconds,answers:arr};
+    let data=JSON.stringify(obj);
+    xml.send(data);
+ });

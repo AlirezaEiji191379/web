@@ -129,7 +129,7 @@ function addExamToDb()
         session_start();
     }
     $fname=makeSafe($_SESSION["fname"]);
-    $duration=makeSafe($_SESSION["time"]);
+    $duration=makeSafe($_SESSION["time"])*60;
     $points=makeSafe($_SESSION["points"]);
     $startTime=makeSafe($_SESSION["startTime"]);
     $endTime=makeSafe($_SESSION["endTime"]);
