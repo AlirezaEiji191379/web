@@ -252,6 +252,32 @@ function postNote() {
     //   .then(data => console.log(data));
 }
 
+function saveToDB(event) {
+    event.returnValue='';
+    var a = document.getElementsByClassName("radioId");
+    let arr=[];
+    for(let i=1;i<points+1;i++){
+        var b=a[i].getElementsByClassName("radioInputs")
+        for(let j=0;j<4;j++){
+            if(i>points) continue;
+            if(b[j].checked==true){
+                arr[i]=j+1;
+                break;
+            }
+        }
+    }
+    let xml=new XMLHttpRequest();
+    xml.onreadystatechange=function () {
+        if(this.status==200&& this.readyState==4){
+            console.log(this.responseText);
+        }
+    };
+    xml.open("POST","../../../../includes/userPanel/saveDataInDatabase.php");
+    xml.setRequestHeader("Content-Type", "application/json");
+    let obj={time:totalSeconds,answers:arr};
+    let data=JSON.stringify(obj);
+    xml.send(data);
+}
 
 
 
@@ -288,10 +314,17 @@ var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var totalSeconds =0;
 var points=0;
-setInterval(setTime, 1000);
+let x=setInterval(setTime, 1000);
 getAnsFromDataBase()
 function setTime() {
     totalSeconds--;
+    if(totalSeconds==-1){
+        window.removeEventListener('beforeunload',saveToDB);
+        document.getElementById("form").submit();
+        clearInterval(x);
+        saveToDB();
+        return;
+    }
     secondsLabel.innerHTML = pad(totalSeconds % 60);
     minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
 }
@@ -304,29 +337,4 @@ function pad(val) {
         return valString;
     }
 }
- window.addEventListener('beforeunload',function (event) {
-    event.returnValue='';
-    var a = document.getElementsByClassName("radioId");
-    let arr=[];
-    for(let i=1;i<points+1;i++){
-       var b=a[i].getElementsByClassName("radioInputs")
-       for(let j=0;j<4;j++){
-           if(i>points) continue;
-            if(b[j].checked==true){
-                arr[i]=j+1;
-                break;
-            }
-       }
-    }
-    let xml=new XMLHttpRequest();
-    xml.onreadystatechange=function () {
-        if(this.status==200&& this.readyState==4){
-            console.log(this.responseText);
-        }
-    };
-    xml.open("POST","../../../../includes/userPanel/saveDataInDatabase.php");
-    xml.setRequestHeader("Content-Type", "application/json");
-    let obj={time:totalSeconds,answers:arr};
-    let data=JSON.stringify(obj);
-    xml.send(data);
- });
+ window.addEventListener('beforeunload',saveToDB);

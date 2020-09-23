@@ -1,7 +1,5 @@
 <?php include_once ("../../../../includes/checkValidation/userValidation.php");
 
-
-
 ?>
 
     <!DOCTYPE html>

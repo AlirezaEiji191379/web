@@ -32,7 +32,7 @@ if(isset($_SESSION["examId"])==false){
 
 <!-- -->
 
-<form action="mailto:exams@raamaangroup.com" method="post" enctype="text/plain" class="form-horizontal">
+<form action="../../../../includes/userPanel/finishExam.php" method="post" class="form-horizontal" id="form">
   <div class="userpassContainer">
      <!-- <input type="text" name="username" placeholder="Username">
       <input type="text" name="password" placeholder="Password"> -->
