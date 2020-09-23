@@ -128,6 +128,7 @@ function getAnsFromDataBase() {
                  }
              }
              for(i=1;i<array.length;i++){
+                 if(array[i]==0) continue;
                  var a = document.getElementsByClassName("radioId")
                  var b = a[i].getElementsByClassName("radioInputs")
                  b[array[i]-1].checked=true;

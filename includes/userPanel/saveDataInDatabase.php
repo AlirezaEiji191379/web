@@ -26,5 +26,4 @@ for($i=1;$i<count($arr);$i++){
         $mysql->query("UPDATE `userkey` SET `answer`='$ans' WHERE `username`='$username' AND `examId`='$examId' AND `question`='$i'");
     }
 }
-
 $mysql->close();
