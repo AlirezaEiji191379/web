@@ -172,4 +172,3 @@ function addKeyToDB(){
 function makeSafe($input){
     return stripcslashes(htmlspecialchars(trim($input)));
 }
-

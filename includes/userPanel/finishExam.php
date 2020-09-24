@@ -1,5 +1,6 @@
 <?php
 include_once ("../DBInformation/dbInf.php");
+include_once ("function.php");
 $mysql=new mysqli(host,username,password,dbname);
 if(session_status()==PHP_SESSION_NONE){
     session_start();
@@ -24,9 +25,10 @@ for($i=1;$i<$points+1;$i++){
         $mysql->query("UPDATE `userkey` SET `answer`='$ans' WHERE `username`='$username' AND `examId`='$examId' AND `question`='$i'");
     }
 }
+examCorrection($username,$examId);
 $mysql->close();
-header("location: ../../Pages/userPanel/Student/before_exam/student.php");
 unset($_SESSION["examId"]);
+header("location: ../../Pages/userPanel/Student/before_exam/student.php");
 
 
 
