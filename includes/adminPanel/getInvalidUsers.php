@@ -25,7 +25,6 @@
 <body>
 <?php
 include_once(__DIR__."/../DBInformation/dbInf.php");
-echo "hi alireza";
 $examRequest=new mysqli(host,username,password,dbname);
 $exam=new mysqli(host,username,password,dbname);
 $user=new mysqli(host,username,password,dbname);
