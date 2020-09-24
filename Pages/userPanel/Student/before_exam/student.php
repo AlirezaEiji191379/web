@@ -40,6 +40,30 @@ date_default_timezone_set("Asia/Tehran");
                     reqXhttp.send();
                 }
             </script>
+            <script>
+
+                function examDownload(id){
+                    let xhttp=new XMLHttpRequest();
+                    xhttp.onreadystatechange=function () {
+                        if(this.readyState==4 && this.status==200){
+                            alert(this.responseText)
+                        }
+                    };
+                    xhttp.open("GET","../../../../includes/userPanel/download.php?file=qDir&&examId="+id,true);
+                    xhttp.send();
+                }
+                function keyDownLoad(id) {
+                    let xhttp=new XMLHttpRequest();
+                    xhttp.onreadystatechange=function () {
+                        if(this.readyState==4 && this.status==200){
+                            alert(this.responseText)
+                        }
+                    };
+                    xhttp.open("GET","../../../../includes/userPanel/download.php?file=aDir&&examId="+id,true);
+                    xhttp.send();
+                }
+
+            </script>
         </head>
 
 <body>

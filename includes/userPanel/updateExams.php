@@ -41,6 +41,7 @@ else{
         $color="blue";
         $id=$rows["examId"];
         $display="block";
+        $showLink="none";
         if($zero==1) {
             foreach ($addedExams as $key => $value) {
                 if ($id == $key) {
@@ -62,6 +63,7 @@ else{
                                 $btnMessage = "نتیجه";
                                 $color = "dodgerBlue";
                                 if($corrected==0) $display="none";
+                                $showLink="inline";
                             }
 
                         }
@@ -78,6 +80,8 @@ else{
         <div class=\"card-body\">
         <h5 class=\"card-title\">$title</h5>
         <h6 class=\"card-subtitle mb-2 text-muted\">اطلاعات آزمون</h6>
+        <a href=' ' id='$id' style='color: dodgerblue;display:$showLink' onclick='examDownload(id)'>دانلود سوالات آزمون</a></br>
+        <a href=' ' id='$id' style='color: dodgerblue;display:$showLink' onclick='keyDownLoad(id)'>دانلود پاسخ آزمون</a>
         <pre class=\"card-text\" style='width:auto'>
 تعداد سوالات:$points
 $startTime 

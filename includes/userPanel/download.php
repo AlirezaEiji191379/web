@@ -45,7 +45,11 @@ if(isset($_GET["file"])){
     if(session_status()==PHP_SESSION_NONE){
         session_start();
     }
-    $examId=$_SESSION["examId"];
+    if(isset($_SESSION["examId"]))$examId=$_SESSION["examId"];
+    else{
+        $examId=$_GET["examId"];
+        echo $examId;
+    }
     if($_GET["file"]=="qDir"){
         downloadExamFile($examId);
 
