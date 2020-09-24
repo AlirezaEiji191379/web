@@ -28,7 +28,8 @@ function compareDates($date,$start,$end,$now){
     }else{
         if($startTime>time()){
             return  true;
-        }else return  false;
+        }else {
+            return  false;}
     }
 }
 
@@ -42,7 +43,7 @@ function saveToSession($start,$end){
     }
     $_SESSION["fname"]=$_POST["fname"];
     $_SESSION["points"]=$_POST["points"];
-    $_SESSION["time"]=$_POST["time"];
+    //$_SESSION["time"]=$_POST["time"];
     $_SESSION["startTime"]=$start;
     $_SESSION["endTime"]=$end;
 }
@@ -129,7 +130,6 @@ function addExamToDb()
         session_start();
     }
     $fname=makeSafe($_SESSION["fname"]);
-    $duration=makeSafe($_SESSION["time"])*60;
     $points=makeSafe($_SESSION["points"]);
     $startTime=makeSafe($_SESSION["startTime"]);
     $endTime=makeSafe($_SESSION["endTime"]);
@@ -137,8 +137,8 @@ function addExamToDb()
     $aDir=ini_get("upload_tmp_dir")."/upload/".$_FILES["myFile2"]["name"];
     $mysql=new mysqli(host,username,password,dbname);
     $accept=0;
-    $statement=$mysql->prepare("INSERT INTO `exam` (`fname`,`points`,`duration`,`startTime`,`endTime`,`qDir`,`aDir`,`accept`) VALUES (?,?,?,?,?,?,?,?)");
-    $statement->bind_param("siiiissi",$fname,$points,$duration,$startTime,$endTime,$qDir,$aDir,$accept);
+    $statement=$mysql->prepare("INSERT INTO `exam` (`fname`,`points`,`startTime`,`endTime`,`qDir`,`aDir`,`accept`) VALUES (?,?,?,?,?,?,?)");
+    $statement->bind_param("siiissi",$fname,$points,$startTime,$endTime,$qDir,$aDir,$accept);
     $statement->execute();
     $id=$statement->insert_id;
     $_SESSION["insert_Id"]=$id;

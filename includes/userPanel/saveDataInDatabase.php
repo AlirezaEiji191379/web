@@ -10,15 +10,19 @@ $examId=$_SESSION["examId"];
 $username=$_SESSION["username"];
 $obj=json_decode($json);
 $arr=$obj->answers;
-$time=$obj->time;
+$result=$mysql->query("SELECT `attendance` FROM `examrequest` WHERE `username`='$username' AND `examId`='$examId'" );
+$row=$result->fetch_assoc();
+$att=$row["attendance"];
 $result=$mysql->query("SELECT `points` FROM `exam` WHERE `examId`='$examId'");
 $row=$result->fetch_assoc();
 $points=$row["points"];
 $result=$mysql->query("SELECT `username` FROM `userkey` WHERE `username`='$username' AND `examId`='$examId'");
 if($result->num_rows==0) $update=0;
 else $update=1;
-$mysql->query("UPDATE `examrequest` SET `time`='$time' WHERE `username`='$username' AND `examId`='$examId'");
-
+//if($att==0) {
+//    $time=time();
+//    $mysql->query("UPDATE `examrequest` SET `time`='$time' WHERE `username`='$username' AND `examId`='$examId'");
+//}
 for($i=1;$i<$points+1;$i++){
     if(isset($arr[$i])==false){
         $ans=0;

@@ -274,7 +274,7 @@ function saveToDB(event) {
     };
     xml.open("POST","../../../../includes/userPanel/saveDataInDatabase.php");
     xml.setRequestHeader("Content-Type", "application/json");
-    let obj={time:totalSeconds,answers:arr};
+    let obj={answers:arr};
     let data=JSON.stringify(obj);
     xml.send(data);
 }

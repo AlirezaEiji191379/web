@@ -6,12 +6,13 @@ if(session_status()==PHP_SESSION_NONE){
 }
 $examId=$_SESSION["examId"];
 $username=$_SESSION["username"];
-$result=$mysql->query("SELECT `points` FROM `exam` WHERE `examId`='$examId'");
+$result=$mysql->query("SELECT `points`,`endTime` FROM `exam` WHERE `examId`='$examId'");
 $row=$result->fetch_assoc();
 $points=$row["points"];
-$y=$mysql->query("SELECT `time` FROM `examrequest` WHERE `examId`='$examId' AND `username`='$username'");
-$row=$y->fetch_assoc();
-$time=$row["time"];
+$endTime=$row["endTime"];
+//$y=$mysql->query("SELECT `time` FROM `examrequest` WHERE `examId`='$examId' AND `username`='$username'");
+//$row=$y->fetch_assoc();
+$time=$endTime-time();
 $arr["time"]=$time;
 $arr["points"]=$points;
 $x=$mysql->query("SELECT `question`,`answer` FROM `userkey` WHERE `examId`='$examId' AND `username`='$username'");

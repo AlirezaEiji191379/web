@@ -40,19 +40,28 @@ else{
         $btnMessage="ثبت نام";
         $color="blue";
         $id=$rows["examId"];
+        $display="block";
         if($zero==1) {
             foreach ($addedExams as $key => $value) {
                 if ($id == $key) {
                     if ($value == 0) {$btnMessage = "در حال تایید"; $color="gray";}
                     else if ($value == 1) {
-                        if($examAttendance[$key]==0){$btnMessage = "شرکت در آزمون"; $color="green";}
+                        if($examAttendance[$key]==0){
+                            $btnMessage = "شرکت در آزمون";
+                            $color="green";
+                            if($rows["startTime"]>time()) $display="none";
+                            if($rows["endTime"]<time()) $display="none";
+                        }
                         elseif($examAttendance[$key]==1){
                             if($examFinished[$key]==0) {
                                 $btnMessage = "ادامه آزمون";
                                 $color = "purple";
+                                if($rows["endTime"]<time()) $display="none";
                             }else{
+                                $corrected=$rows["corrected"];
                                 $btnMessage = "نتیجه";
                                 $color = "dodgerBlue";
+                                if($corrected==0) $display="none";
                             }
 
                         }
@@ -62,7 +71,6 @@ else{
         }
         $title=$rows["fname"];
         $points=$rows["points"];
-        $time=$rows["duration"];
         $startTime=date('تاریخ آغاز آزمون:Y/m/d ساعت: H:i',$rows["startTime"]);
         $endTime=date('تاریخ پایان آزمون:Y/m/d ساعت: H:i',$rows["endTime"]);
         echo "
@@ -72,11 +80,10 @@ else{
         <h6 class=\"card-subtitle mb-2 text-muted\">اطلاعات آزمون</h6>
         <pre class=\"card-text\" style='width:auto'>
 تعداد سوالات:$points
-زمان آزمون:$time دقیقه
 $startTime 
 $endTime       
         </pre>
-        <button type=\"button\" class=\"btn btn-primary\" style='background-color: $color' id='$id' onclick='sendRequest(id)'>$btnMessage</button>
+        <button type=\"button\" class=\"btn btn-primary\" style='background-color: $color;display: $display' id='$id' onclick='sendRequest(id)'>$btnMessage</button>
         </div>
         </div>
         ";

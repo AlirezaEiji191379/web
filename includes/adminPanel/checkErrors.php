@@ -1,5 +1,4 @@
 <?php
-
 if(isset($_GET["error"])){
     if($_GET["error"]=="empty"){
         echo "لطفا همه فیلد ها را پر کنید!";

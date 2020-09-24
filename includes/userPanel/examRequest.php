@@ -1,6 +1,6 @@
 <?php
 include_once ("../DBInformation/dbInf.php");
-
+date_default_timezone_set("Asia/Tehran");
 $mysql=new mysqli(host,username,password,dbname);
 if(isset($_GET["examId"])){
     $examId=$_GET["examId"];
@@ -11,10 +11,9 @@ if(isset($_GET["examId"])){
     $select=$mysql->query("SELECT `examId`,`accept`,`finished` FROM `examrequest` WHERE `username`='$username' AND `examId`='$examId'");
 
     if($select->num_rows==0){
-        $result=$mysql->query("SELECT `duration` FROM `exam` WHERE `examId`=$examId");
+        $result=$mysql->query("SELECT `endTime` FROM `exam` WHERE `examId`=$examId");
         $row=$result->fetch_assoc();
-        $time=$row["duration"]*60;
-        $result=$mysql->query("INSERT INTO `examrequest` (`examId`,`username`,`time`) VALUES ('$examId','$username','$time')");
+        $result=$mysql->query("INSERT INTO `examrequest` (`examId`,`username`) VALUES ('$examId','$username')");
         echo "update";
     }else{
         $row=$select->fetch_assoc();

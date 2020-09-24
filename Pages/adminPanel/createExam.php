@@ -18,8 +18,8 @@
  <label for="points" class="formLabel">تعداد سوالات</label><br>
   <input type="number" id="points" name="points" step="5" class="formInput"><br>
   
-  <label for="points" class="formLabel">زمان آزمون</label><br>
-  <input type="number" id="time" name="time" step="1" class="formInput"><br>
+<!--  <label for="points" class="formLabel">زمان آزمون</label><br>-->
+<!--  <input type="number" id="time" name="time" step="1" class="formInput"><br>-->
   
   <label for="start" class="formLabel">تاریخ آزمون</label><br>
   <input type="date" id="birthday" name="birthday" class="formInput"><br>

@@ -1,5 +1,5 @@
 <?php include_once ("../../../../includes/checkValidation/userValidation.php");
-
+include_once ("../../../../includes/checkValidation/examTimeValidation.php");
 if(session_status()==PHP_SESSION_NONE){
     session_start();
 }
@@ -90,7 +90,7 @@ if(isset($_SESSION["examId"])==false){
           </div>
           
             </div>
-             <input type="submit" class="btn btn-default getStartedButton"></input>
+             <input type="submit" class="btn btn-default getStartedButton" value="ثبت پاسخ و ارسال"></input>
             </form>
            
            
