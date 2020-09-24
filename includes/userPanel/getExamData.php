@@ -10,8 +10,6 @@ $result=$mysql->query("SELECT `points`,`endTime` FROM `exam` WHERE `examId`='$ex
 $row=$result->fetch_assoc();
 $points=$row["points"];
 $endTime=$row["endTime"];
-//$y=$mysql->query("SELECT `time` FROM `examrequest` WHERE `examId`='$examId' AND `username`='$username'");
-//$row=$y->fetch_assoc();
 $time=$endTime-time();
 $arr["time"]=$time;
 $arr["points"]=$points;

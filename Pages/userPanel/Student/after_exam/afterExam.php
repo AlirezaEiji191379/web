@@ -1,4 +1,5 @@
 <?php include_once ("../../../../includes/checkValidation/userValidation.php");
+include_once ("../../../../includes/userPanel/examCalculate.php");
 if(session_status()==PHP_SESSION_NONE){
     session_start();
 }
@@ -32,20 +33,15 @@ if(isset($_SESSION["examId"])==false){
 <div class="examsContainer" >
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">...در حال تصحیح پاسخ برگ ها</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Exam Title</h6>
-    <p class="card-text">Rotbe: <br> Darsad ha: <br> Taraz:</p>
+    <h5 class="card-title">کارنامه شما</h5>
+    <h6 class="card-subtitle mb-2 text-muted"><?php echo getExamTitle($_SESSION["examId"])?></h6>
+    <p class="card-text">رتبه:<?php echo getRank($_SESSION["examId"],$_SESSION["username"])?> <br> درصد:<?php echo getPercent($_SESSION["examId"],$_SESSION["username"])?> <br> Taraz:</p>
 
-  <div class="progress">
-  <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-</div>
+<!--  <div class="progress">-->
+<!--  <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>-->
+<!--</div>-->
   </div>
 </div>
-
-
 </div>
-
-
-        </body>
-        
-        </html>
+</body>
+ </html>
