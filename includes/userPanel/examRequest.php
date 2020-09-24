@@ -25,6 +25,7 @@ if(isset($_GET["examId"])){
                     $mysql->query("UPDATE `examrequest` SET `attendance`=1 WHERE `username`='$username' AND `examId`='$examId'");
                     echo "exam";
                 }else{
+                    $_SESSION["examId"] = $examId;
                     echo "result";
                 }
         }

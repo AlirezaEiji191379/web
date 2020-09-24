@@ -1,4 +1,11 @@
-<?php include_once ("../../../../includes/checkValidation/userValidation.php");?>
+<?php include_once ("../../../../includes/checkValidation/userValidation.php");
+if(session_status()==PHP_SESSION_NONE){
+    session_start();
+}
+if(isset($_SESSION["examId"])==false){
+    header("location: ../before_exam/student.php");
+}
+?>
     <!DOCTYPE html>
     <html>
         <header>
