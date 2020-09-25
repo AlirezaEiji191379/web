@@ -1,5 +1,6 @@
 <?php
 include_once("../DBInformation/dbInf.php");
+include_once ("../checkValidation/adminValidation.php");
 function setRank($examId)
 {
     $mysql = new mysqli(host, username, password, dbname);
