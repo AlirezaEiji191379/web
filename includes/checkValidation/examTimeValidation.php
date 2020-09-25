@@ -14,11 +14,7 @@ if(time()>=$endTime){
     header("location: ../before_exam/student.php");
 }
 if($startTime>time()) header("location: ../before_exam/student.php");
-$x=$mysql->query("SELECT `finished` FROM `examrequest` where `examId`=`$examId` AND `username`='$username'");
-$row=$x->fetch_assoc();
-if($row["finished"]==1){
-    header("location: ../before_exam/student.php");
-}
+
 
 
 
