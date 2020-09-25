@@ -39,6 +39,21 @@ function downloadAnswerFile($examId){
     @readfile($aDir);
     exit();
 }
+function validation($username,$examId,$type){
+    $mysql=new mysqli(host,username,password,dbname);
+    $result=$mysql->query("SELECT * FROM `examrequest` WHERE `username`='$username' AND `examId`='$examId'");
+    if($result->num_rows==0) return false;
+    $rows=$result->fetch_assoc();
+    $accept=$rows["accept"];
+    if($accept==0) return false;
+    $exam=$mysql->query("SELECT `endTime`,`startTime` FROM `exam` WHERE `examId`='$examId'");
+    $rows=$exam->fetch_assoc();
+    $start=$rows["startTime"];
+    $end=$rows["endTime"];
+    if($type=="qDir" && time()<$start) return false;
+    if($type=="aDir" && time()<$end) return  false;
+    return true;
+}
 
 
 if(isset($_GET["file"])){
@@ -48,13 +63,13 @@ if(isset($_GET["file"])){
     if(isset($_SESSION["examId"]))$examId=$_SESSION["examId"];
     else{
         $examId=$_GET["examId"];
-        echo $examId;
     }
+    echo $_SESSION["username"];
     if($_GET["file"]=="qDir"){
-        downloadExamFile($examId);
+        if(validation($_SESSION["username"],$examId,"qDir")==true)downloadExamFile($examId);
 
     }elseif($_GET["file"]=="aDir"){
-        downloadAnswerFile($examId);
+        if(validation($_SESSION["username"],$examId,"aDir")==true)downloadAnswerFile($examId);
     }
 }
 

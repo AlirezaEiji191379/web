@@ -45,7 +45,11 @@ else{
         if($zero==1) {
             foreach ($addedExams as $key => $value) {
                 if ($id == $key) {
-                    if ($value == 0) {$btnMessage = "در حال تایید"; $color="gray";}
+                    if ($value == 0) {
+                        $btnMessage = "در حال تایید";
+                        $color="gray";
+                        if($rows["startTime"]<time()) $display="none";
+                    }
                     else if ($value == 1) {
                         if($examAttendance[$key]==0){
                             $btnMessage = "شرکت در آزمون";
